@@ -1,4 +1,4 @@
-# Zumo_Pi
-Three weeks school project programming a robot to live in the real world
+# Sumo_Pi
+School project, where we made a robot by combining a Arduino Sumo shield and a Raspberry Pi.
 
 Installation instructions coming.
