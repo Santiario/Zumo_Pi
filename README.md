@@ -1,28 +1,33 @@
 # Sumo_Pi
 School project, where we made a robot by combining a Arduino Sumo shield and a Raspberry Pi.
 
-=Getting Started with Zumo-Pi=
+#Getting Started with Zumo-Pi#
 Your Zumo robot is now driven by a Raspberry Pi processor, which provides considerably more power and
 programming possibilities than the Arduino. It comes fully loaded with Python (versions 2 and 3) and all
 of the important packages for connecting Python to your robot’s sensors and motors. You should be able to
 take these connections for granted and focus most of your effort on standard Python programming.
 However, there are a few preliminary activities that you will need to perform:
+
 1. Insert the micro-SD card that comes with your robot into the slot on the front of your Raspberry Pi.
 Your student assistants can assist you, if the card has not already been inserted on your robot. Some
 come pre-installed.
+
 2. Connect your robot to the internet via an ethernet cable.
+
 3. Connect your robot to a power source and turn it on. It is important that this is done AFTER
 connecting to the ethernet, not before. As soon as your robot is powered up, it will automatically
 receive an IP address from one of IDI’s servers.
+
 4. You will need to know your robot’s (current) IP address. To find it, go to the following site:
 folk.ntnu.no/haakongi/TDT4113/get ip from mac.php.
 At this site, use the MAC address for your robot’s Raspberry Pi (given to you with the robot) to look
 up your IP address. Here are typical examples of MAC and IP addresses:
 5Of course, this simple example assumes that all obstacles are above ground. It does not account for holes or ravines that
 the robot would probably benefit from avoiding.
-14
+
 MAC: b8:27:eb:1a:36:50
 IP: 129.241.111.162
+
 5. Use the IP address for connecting the robot to your laptop via the internet.
 Note that you will be given BOTH the MAC and IP addresses when you receive your robot. However, that
 IP address will only work when you are in the P-15 lab. If you are working anywhere else, you will need to go
@@ -30,6 +35,7 @@ through the process above each time you begin a new session with the robot. That
 connects and disconnects between laptop and robot, but each disconnect will NOT necessitate acquiring a
 new IP address, as long as you remain in approximately the same physical location (e.g., the same room in
 a building).
+
 From your laptop, you can access the robot using the ’ssh’ command from a terminal window. Simply type:
 ssh pi@<your IP address>
 So with the IP address above, this is: ssh pi@129.241.111.162
@@ -46,9 +52,10 @@ Then, when requested by UNIX, you can enter a new password for user ”monte”; the
 can access the robot from your laptop via:
 ssh monte@<your IP address>
 To change the root password, just do:
+
 sudo passwd
 and enter the new password as requested by UNIX.
-15
+
 Note that the robot comes with the directory /home/pi. You will probably want to add at least one new
 directory, such as ”robot”, where you can store all of your robot code. For example, assume that we create
 /home/pi/robot as our main robot directory.
@@ -70,10 +77,10 @@ terminal window. To run any of the demos in the file robodemo.py, such as dancer
 >>> from robodemo import *
 >>> dancer()
 
-==Special for Windows Users==
+##Special for Windows Users##
 If you are using a Windows machine, access to the Raspberry Pi is slightly different, but still quite easy.
 
-===Putty===
+###Putty###
 Windows does not have built-in support for ssh from the command line, so you will need some 3rd-party
 software. A good alternative is putty, which you can download here:
 http://www.chiark.greenend.org.uk/?sgtatham/putty/download.html
@@ -84,10 +91,11 @@ When you open putty, you get a window with a ”Host Name” field (i.e. IP address)
 IP address> and click ”Open”. This opens a terminal window on the Raspberry Pi, where you can log in
 and begin running commands.
 
-===Filezilla===
+###Filezilla###
 You will also need a mechanism for transfering files between the Raspberry Pi and Windows, which does not
 support command-line sftp. Filezilla is a good tool for the job:
 https://filezilla-project.org/download.php?type=client
+
 Open Filezilla and choose File ?Site Manager, then use ”New Site” to create a site, whose information can
 be entered or changed on the right side of the site manager. The host is the IP address of your Raspberry
 Pi, the port is 22, and the protocol is SFTP. The logon type is Normal, and the username and password are
