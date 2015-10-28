@@ -5,6 +5,7 @@ import wiringpi2 as wp
 
 
 class Motors():
+    """Wrapper for the motors."""
     def __init__(self):
         self.setup()
 
@@ -112,4 +113,3 @@ class Motors():
         if duration:
             sleep(duration)
             self.stop()
-
