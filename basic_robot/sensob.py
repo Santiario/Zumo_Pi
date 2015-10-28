@@ -4,7 +4,7 @@ __author__ = 'estensen'
 
 
 class Sensob:
-    """Interface between sensors and BBCON"""
+    """Interface between sensors and bbcon"""
     def __init__(self, sensor, value):
         """Initialize Sensob object.
 
