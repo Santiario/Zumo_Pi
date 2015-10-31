@@ -3,7 +3,7 @@ import time
 __author__ = 'estensen'
 
 
-class bbcon:
+class Bbcon:
     def __init__(self, behaviors, active_behaviors, sensobs, motobs, arbitrator):
         """Initialize bbcon.
 
