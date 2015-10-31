@@ -1,4 +1,5 @@
 # import modules here
+from .motors import Motors
 
 __author__ = 'estensen'
 
@@ -6,9 +7,9 @@ __author__ = 'estensen'
 class Motob:
     """Interface between a behavior and one or more motors."""
     # TODO: Rewrite class to use actions instead of motors?
-    # https://github.com/Belgaux/PLAB2/blob/master/project_files/motob.py
     # F --> Forward
     # L --> Left
+    # int --> duration
     def __init__(self):
         """Initialize Motob object.
 
