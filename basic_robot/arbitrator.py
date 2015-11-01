@@ -1,5 +1,3 @@
-from operator import attrgetter
-
 __author__ = 'estensen'
 
 

@@ -25,18 +25,13 @@ def main():
     motob = Motob()
     print('Made motob')
 
-    bbcon = Bbcon([ultrasonic_behavior], [ultrasonic_behavior], [ultrasonic_sensob], motob,arbitrator)
+    bbcon = Bbcon([ultrasonic_behavior], [ultrasonic_sensob], motob, arbitrator)
 
     print('Made motob')
 
     print('Running bbcon')
-    bbcon.run_one_timestep()
-
-
-
-
-
-
+    while True:
+        bbcon.run_one_timestep()
 
 
 if __name__ == '__main__':
