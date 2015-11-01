@@ -56,6 +56,7 @@ class SonicBehavior(Behavior):
 
     def set_match_degree(self):
         """Generate match according to environment."""
+        print('Distance is:', self.sensob.value)
         if self.sensob.value < 5:
             self.weight = 1.0
         elif self.sensob.value < 10:
