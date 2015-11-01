@@ -16,8 +16,8 @@ class Behavior:
         priority : Static predefined value indicating the importance of this behavior.
         match_degree : Real number in the range [0, 1] indicating the degree to which the current conditions warrant the
             performance of this behavior.
-        weight : The product of the priority and match_degree, which the arbitrator uses as the basis for selecting the
-            winning timestep.
+        weight : The product of the priority and match_degree, which the arbitrator uses as the basis for selecting
+        the winning timestep.
         """
         self.bbcon = bbcon
         self.sensobs = []
