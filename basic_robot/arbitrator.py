@@ -8,6 +8,8 @@ class Arbitrator:
         pass
 
     def choose_action(self, active_behaviors):
+        for behavior in active_behaviors:
+            print(behavior)
         """Choose winning behavior.
 
         Returns
