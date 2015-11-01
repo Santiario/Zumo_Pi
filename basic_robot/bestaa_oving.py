@@ -21,7 +21,7 @@ def main():
 
     ultrasonic_behavior = SonicBehavior(ultrasonic_sensob)
     camera_behavior = CameraBehavior(camera_sensob)
-    #reflectance_behavior =
+    # reflectance_behavior =
     behaviors = [ultrasonic_behavior, camera_behavior]
     print('Made behaviors')
 
@@ -39,8 +39,8 @@ def main():
         while True:
             bbcon.run_one_timestep()
     except:
+        bbcon.motob.m.stop()
         print('Exited')
-
 
 
 if __name__ == '__main__':

@@ -50,6 +50,10 @@ class Behavior:
 
 
 class SonicBehavior(Behavior):
+
+    def __repr__(self):
+        return 'Ultrasonic'
+
     def set_match_degree(self):
         """Generate match according to environment."""
         if self.sensob.value < 5:
@@ -58,7 +62,6 @@ class SonicBehavior(Behavior):
             self.match_degree = 0.9
         else:
             self.match_degree = 0.6
-
 
     def set_motor_recommendation(self):
         """Generate motor recommendation for this behavior."""
@@ -69,6 +72,9 @@ class SonicBehavior(Behavior):
 
 
 class CameraBehavior(Behavior):
+
+    def __repr__(self):
+        return 'Camera'
 
     def set_match_degree(self):
         """Generate match according to environment."""

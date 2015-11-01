@@ -18,5 +18,5 @@ class Arbitrator:
         for behavior in active_behaviors:
             if behavior.weight > winning_behavior.weight:
                 winning_behavior = behavior
-        #print("Winning behavior is " + str(winning_behavior.motor_recommendation))
+        print("Winning behavior is", winning_behavior + ". Recommendation:", str(winning_behavior.motor_recommendation))
         return winning_behavior.motor_recommendation
