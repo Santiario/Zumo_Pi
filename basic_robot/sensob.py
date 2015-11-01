@@ -5,7 +5,7 @@ __author__ = 'estensen'
 
 class Sensob:
     """Interface between sensors and bbcon"""
-    def __init__(self, sensor, value):
+    def __init__(self, sensor):
         """Initialize Sensob object.
 
         Parameters
@@ -14,7 +14,7 @@ class Sensob:
         value : Sensor value.
         """
         self.sensor = sensor
-        self.value = value
+        self.update()  # Gets initial value of sensor
 
     def update(self):
         """Update sensory object.
