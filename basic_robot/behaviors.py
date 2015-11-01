@@ -70,6 +70,7 @@ class SonicBehavior(Behavior):
             self.motor_recommendation = ('T', 1)  # TODO: Change the number to match a 180 degree turn
         else:
             self.motor_recommendation = ('F', 2)  # Drive forward for two more seconds
+        self.set_match_degree()
 
 
 class CameraBehavior(Behavior):
@@ -90,6 +91,7 @@ class CameraBehavior(Behavior):
             self.motor_recommendation = ('B', 7)  # Drives backwards for 7 seconds
         else:
             self.motor_recommendation = ('F', 2)  # Continue forward for 2 seconds
+        self.set_match_degree()
 
 
 
