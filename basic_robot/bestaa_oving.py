@@ -35,8 +35,12 @@ def main():
     print('Made BBCON')
 
     print('Running...')
-    while True:
-        bbcon.run_one_timestep()
+    try:
+        while True:
+            bbcon.run_one_timestep()
+    except:
+        print('Exited')
+
 
 
 if __name__ == '__main__':
