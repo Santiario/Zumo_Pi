@@ -1,10 +1,11 @@
 # import modules here
+from operator import attrgetter
 
 __author__ = 'estensen'
 
 
 class Arbitrator:
-    def __init__(self):
+    def __init__(self, bbcon):
         self.bbcon = bbcon
 
     def choose_action(self):
@@ -12,22 +13,8 @@ class Arbitrator:
 
         Returns
         -------
-        motor_recommendation :
-        halt_request_flag :
+        motor_recommendation : On the format (action, duration).
         """
-        actions = []
-        # for behavior in bbcon.active_behaviors:
-        #     actions.append(behavior)
-        return (motor_recommendation, halt_request_flag)
-
-    def pick_highest_weight(self):
-        """Choose behavior based on weight.
-
-        Returns
-        -------
-
-        """
-        winner = None
-        for
-
-        return winner
+        winning_behavior = max(self.bbcon.active_behaviors, key=attrgetter('weight'))
+        print("Winning behavior is " + str(winning_behavior))
+        return winning_behavior.motor_recommendation
