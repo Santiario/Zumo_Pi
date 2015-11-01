@@ -15,18 +15,18 @@ class Motob:
 
         Parameters
         ----------
-        motors : A list of the motors whose settings will be determined by the motob.
-        value : A holder of the most recent motor recommendation sent to the motob.
+        action : Holder of the action whose settings will be determined by the motob.
+        duration : Holder of the most recent duration the of the action.
         """
         self.m = Motors()
-        self.motors = []  # MR only one motor at a time?
-        self.value = None
+        self.action = None
+        self.duration = None
 
     def update(self, recommendation):
         """Update object.
 
         Receive a new motor recommendation.
-        Load it into a value slot.
+        Load it into the .
         Operationalize it.
 
         Example
@@ -52,11 +52,15 @@ class Motob:
         val = [0.5, 0] Turn right on the spot
         val = 0.5, 0.2] Turn right while driving forward
         """
-        if self.value == 0:
-            m.stop()
-        else:
-            val = []
-            duration =
-            m.set_value(val, dur=duration)  # The duration of the turning has to be tuned
-
-        # Val should be a 2-element vector with values for the left and right motor speeds, both in the range [-1, 1].
+        if self.action == 'F':
+            self.m.set_value(duration)
+        elif self.action == 'T':
+            self.m.set_value((1, -1), 1)
+        elif self.action == 'L':
+            self.m.left(dur=duration)
+        elif self.action == 'R':
+            self.m.right(dur=duration)
+        elif self.action == 'S':
+            self.m.stop()
+        elif self.action == 'B':
+            self.m.backward(dur=duration)

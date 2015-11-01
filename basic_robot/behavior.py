@@ -12,7 +12,6 @@ class Behavior:
         sensobs : List of the sensobs this behavior uses.
         motor_recommendations : Motor recommendation for this behavior. Provides this to the arbitrator.
             Assume that all motobs are used by all behaviors.
-        active_flag : Boolean indicating if behavior is active or inactive.
         halt_request : Boolean indicating if the behavior will request the robot to halt all activity.
         priority : Static predefined value indicating the importance of this behavior.
         match_degree : Real number in the range [0, 1] indicating the degree to which the current conditions warrant the
@@ -23,7 +22,6 @@ class Behavior:
         self.bbcon = bbcon
         self.sensobs = []
         self.motor_recommendation = None
-        self.active_flag = True
         self.halt_request = False
         self.priority = 0
         self.match_degree = 0
