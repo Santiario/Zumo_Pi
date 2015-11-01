@@ -47,7 +47,7 @@ class Behavior:
     def sense_and_act(self):
         """Computes behavior and sensob readings to produce motor recommendations and halt requests."""
         self.set_match_degree()
-        self.motor_recommendation = self.set_motor_recommendation()
+        self.set_motor_recommendation()
 
 
 class SonicBehavior(Behavior):
