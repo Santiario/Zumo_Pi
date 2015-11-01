@@ -1,11 +1,19 @@
 from sensors import *
+from sensobs import *
+from behaviors import *
+
+
 def main():
-    """
-    Initialize all sensors
-    """
     ultrasonic_sensor = Ultrasonic()
-    reflectance_sensor = ReflectanceSensors()
-    camera_sensor = Camera()
+    #reflectance_sensor = ReflectanceSensors()
+    #camera_sensor = Camera()
+
+    ultrasonic_sensob = Sensob(ultrasonic_sensor)
+
+    ultrasonic_behavior = SonicBehavior(ultrasonic_sensob)
+
+    
+
 
 
 

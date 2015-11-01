@@ -3,7 +3,7 @@ from abc import abstractmethod
 
 class Behavior:
     """Behaviors the robot can do."""
-    def __init__(self, bbcon):
+    def __init__(self, sensob, priority=0.5, ):
         """Initialize behavior.
 
         Parameters
@@ -19,13 +19,12 @@ class Behavior:
         weight : The product of the priority and match_degree, which the arbitrator uses as the basis for selecting
         the winning timestep.
         """
-        self.bbcon = bbcon
-        self.sensobs = []
-        self.motor_recommendation = None
-        self.halt_request = False
+        self.sensob = sensob
+        self.motor_recommendation = ('F', 2)
         self.priority = 0
         self.match_degree = 0
         self.weight = 0
+        self.update()
 
     def get_weight(self):
         return self.priority * self.match_degree
@@ -66,3 +65,23 @@ class SonicBehavior(Behavior):
             self.motor_recommendation = ('T', 1)  # TODO: Change the number to match a 180 degree turn
         else:
             self.motor_recommendation = ('F', 2)  # Drive forward for two more seconds
+
+
+class CameraBehavior(Behavior):
+
+    def set_match_degree(self):
+        """Generate match according to environment."""
+        if self.sensobs[0].value == 1.0:
+            self.match_degree = 1.0
+        else:
+            self.match_degree = 0.0
+
+    def set_motor_recommendation(self):
+        """Generate motor recommendation for this behavior."""
+        if self.sensobs[0].value == 1.0:
+            self.motor_recommendation = ('B', 7)  # Drives backwards for 7 seconds
+        else:
+            self.motor_recommendation = ('F', 2)  # Continue forward for 2 seconds
+
+
+
