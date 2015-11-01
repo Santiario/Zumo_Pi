@@ -18,8 +18,8 @@ class Sensob:
 
     def update(self):
         """Update sensory object.
-
         Force sensob to fetch relevant sensor value(s).
         Convert to pre-processed sensob value.
         Done once each timestep.
         """
+        self.value = self.sensor.update()

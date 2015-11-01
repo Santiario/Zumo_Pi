@@ -1,12 +1,9 @@
-from .bbcon import Bbcon
 from abc import abstractmethod
-
-__author__ = 'estensen'
 
 
 class Behavior:
     """Behaviors the robot can do."""
-    def __init__(self):
+    def __init__(self, bbcon):
         """Initialize behavior.
 
         Parameters
@@ -23,22 +20,14 @@ class Behavior:
         weight : The product of the priority and match_degree, which the arbitrator uses as the basis for selecting the
             winning timestep.
         """
-        self.bbcon = Bbcon()
+        self.bbcon = bbcon
         self.sensobs = []
-        self.motor_recommendations = None
+        self.motor_recommendation = None
         self.active_flag = True
         self.halt_request = False
         self.priority = 0
         self.match_degree = 0
         self.weight = 0
-
-    @abstractmethod
-    def consider_deactivation(self):
-        """Consider if behavior can be deactivated."""
-
-    @abstractmethod
-    def consider_activation(self):
-        """Consider if behavior can be activated."""
 
     def get_weight(self):
         return self.priority * self.match_degree
@@ -48,20 +37,34 @@ class Behavior:
         """Generate match according to environment."""
 
     @abstractmethod
-    def set_motor_recommendations(self):
+    def set_motor_recommendation(self):
         """Generate motor recommendation for this behavior."""
 
     def update(self):
         """Interface between bbcon and behavior."""
         print("Updating behavior.")
-        if not self.active_flag:
-            self.consider_activation()
-        else:
-            self.consider_deactivation()
         self.sense_and_act()
         self.weight = self.get_weight()
 
     def sense_and_act(self):
         """Computes behavior and sensob readings to produce motor recommendations and halt requests."""
         self.match_degree = self.set_match_degree()
-        self.motor_recommendations = self.set_motor_recommendations()
+        self.motor_recommendation = self.set_motor_recommendation()
+
+
+class SonicBehavior(Behavior):
+    def set_match_degree(self):
+        """Generate match according to environment."""
+        if self.sensobs[0].get_value() < 5:
+            self.match_degree = 1.0
+        elif self.sensobs[0].get_value() < 10:
+            self.match_degree = 0.9
+        else:
+            self.match_degree = 0.6
+
+    def set_motor_recommendation(self):
+        """Generate motor recommendation for this behavior."""
+        if self.sensobs[0].get_value() < 20:
+            self.motor_recommendation = ('T', 1)  # TODO: Change the number to match a 180 degree turn
+        else:
+            self.motor_recommendation = ('F', 2)  # Drive forward for two more seconds
