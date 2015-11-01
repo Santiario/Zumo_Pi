@@ -5,7 +5,7 @@ from .camera import Camera
 from .imager2 import Imager
 import PIL
 
-class Camera_behavior(Sensob):
+class Camera_sensob(Sensob):
 
 
     def __init__(self):
