@@ -30,6 +30,7 @@ class Motob:
         -------
         recommendation = ('L', 1)
         """
+        self.m.stop()
         self.action = recommendation[0]
         self.duration = recommendation[1]
         self.operationalize(self.action, self.duration)
