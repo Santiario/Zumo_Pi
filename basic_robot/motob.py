@@ -6,10 +6,6 @@ __author__ = 'estensen'
 
 class Motob:
     """Interface between a behavior and one or more motors."""
-    # TODO: Rewrite class to use actions instead of motors?
-    # F --> Forward
-    # L --> Left
-    # int --> duration
     def __init__(self):
         """Initialize Motob object.
 
@@ -26,41 +22,43 @@ class Motob:
         """Update object.
 
         Receive a new motor recommendation.
-        Load it into the .
+        Load it into the instance variables.
         Operationalize it.
 
         Example
         -------
-        recommendation = ('L', 45)
+        recommendation = ('L', 1)
         """
-        self.motors[0]
-        self.value = recommendation[1]
-        self.operationalize()
+        self.action = recommendation[0]
+        self.duration = recommendation[1]
+        self.operationalize(self.action, self.duration)
 
-    def operationalize(self):
+    def operationalize(self, action, duration):
         """Convert motor recommendation into motor setting and send to corresponding motor(s).
 
         Parameters
         ----------
-        val : Vector that sets speed and direction of the left and right motors.
+        action : Action the motors will perform.
         dur : Duration of the operation.
 
-        Example
-        -------
-        val = [1, 1]  Full speed forward
-        val = [-1, -1] Full speed backward
-        val = [0.5, 0] Turn right on the spot
-        val = 0.5, 0.2] Turn right while driving forward
+        Example of actions
+        ------------------
+        F = Full speed forward
+        B = Full speed backward
+        T = Turn around 180 degrees
+        L = Turn left while driving forward
+        R = Turn right while driving forward
+        S = Stop
         """
-        if self.action == 'F':
-            self.m.set_value(duration)
-        elif self.action == 'T':
-            self.m.set_value((1, -1), 1)
-        elif self.action == 'L':
-            self.m.left(dur=duration)
-        elif self.action == 'R':
-            self.m.right(dur=duration)
-        elif self.action == 'S':
+        if action == 'F':
+            self.m.set_value((0.5, 0.5), duration)
+        elif action == 'B':
+            self.m.backward((-0.25, -0.25), duration)
+        elif action == 'T':
+            self.m.set_value((0.5, -0.5), duration)  # Turn around, must be tuned for 180 degree turn.
+        elif action == 'L':
+            self.m.left((0.1, 0.25), duration)
+        elif action == 'R':
+            self.m.right((0.25, 0.1), duration)
+        elif action == 'S':
             self.m.stop()
-        elif self.action == 'B':
-            self.m.backward(dur=duration)
