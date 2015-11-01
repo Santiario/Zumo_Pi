@@ -144,7 +144,7 @@ class Ultrasonic(Sensor):
 
     def compute_distance(self, signalon, signaloff):
 
-        print('on: ',signalon, ' off: ',signaloff)
+        #print('on: ',signalon, ' off: ',signaloff)
 
         # Tiden det tok fra signalet ble sendt til det ble returnert
 

@@ -56,4 +56,4 @@ class Bbcon:
         self.motob.update(self.motor_recommendation)
         self.timestep += 1
 
-        print("One timestep finished")
+        #print("One timestep finished")
