@@ -69,7 +69,7 @@ class Bbcon:
             print("Motob updated.")
 
             print('Operating motors')
-            self.motob.operationalize()
+            self.motob.update(self.motor_recommendation)
             print("Waiting...")
             # This pause (in code execution) will allow the motor settings to remain active for a short period of time,
             # e.g., one half second, thus producing activity in the robot, such as moving forward or turning.
