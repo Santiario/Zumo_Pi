@@ -1,5 +1,5 @@
 # import modules here
-from .motors import Motors
+from motors import Motors
 
 __author__ = 'estensen'
 
