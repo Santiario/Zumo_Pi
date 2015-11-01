@@ -50,11 +50,11 @@ class CameraSensob(Sensob):
         If there's enough red, motor"""
         self.sensor.update()
         taken_image = self.sensor.get_value()
-        wta_image = Imager(image=taken_image).map_color_wta() #colors each pixel the dominant color
+        wta_image = Imager(image=taken_image).map_color_wta()  # colors each pixel the dominant color
         red_count = 0
         for i in range(20, 100):
             for j in range(20, 80):
-                if(wta_image.get_pixel(0,0)[0] > 100):
+                if(wta_image.get_pixel(i,j)[0] > 100):
                     red_count += 1
         print('Red count is:', red_count)
         if(red_count > self.color_treshold):
