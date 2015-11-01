@@ -41,11 +41,11 @@ class Behavior:
     def update(self):
         """Interface between bbcon and behavior."""
         self.sense_and_act()
-        self.weight = self.get_weight()
+        # self.weight = self.get_weight()
 
     def sense_and_act(self):
         """Computes behavior and sensob readings to produce motor recommendations and halt requests."""
-        self.set_match_degree()
+        # self.set_match_degree()
         self.set_motor_recommendation()
 
 
@@ -57,11 +57,11 @@ class SonicBehavior(Behavior):
     def set_match_degree(self):
         """Generate match according to environment."""
         if self.sensob.value < 5:
-            self.match_degree = 1.0
+            self.weight = 1.0
         elif self.sensob.value < 10:
-            self.match_degree = 0.9
+            self.weight = 0.9
         else:
-            self.match_degree = 0.6
+            self.weight = 0.6
 
     def set_motor_recommendation(self):
         """Generate motor recommendation for this behavior."""
@@ -79,9 +79,9 @@ class CameraBehavior(Behavior):
     def set_match_degree(self):
         """Generate match according to environment."""
         if self.sensob.value == 1.0:
-            self.match_degree = 1.0
+            self.weight = 1.0
         else:
-            self.match_degree = 0.0
+            self.weight = 0.0
 
     def set_motor_recommendation(self):
         """Generate motor recommendation for this behavior."""

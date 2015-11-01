@@ -56,6 +56,7 @@ class CameraSensob(Sensob):
             for j in range(20, 80):
                 if(wta_image.get_pixel(0,0)[0] > 100):
                     red_count += 1
+        print('Red count is:', red_count)
         if(red_count > self.color_treshold):
             self.value = 1.0
         else:

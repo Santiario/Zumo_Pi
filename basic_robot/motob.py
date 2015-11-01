@@ -19,7 +19,7 @@ class Motob:
         self.duration = None
 
     def update(self, recommendation):
-        print('Motor recommendation:', recommendation)
+        # print('Motor recommendation:', recommendation)
         """Update object.
 
         Receive a new motor recommendation.

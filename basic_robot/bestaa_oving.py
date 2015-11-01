@@ -20,7 +20,7 @@ def main():
     print('Made sensobs')
 
     ultrasonic_behavior = SonicBehavior(ultrasonic_sensob)
-    camera_behavior = CameraBehavior(camera_sensob)
+    camera_behavior = CameraBehavior(camera_sensob, 1.0)
     # reflectance_behavior =
     behaviors = [ultrasonic_behavior, camera_behavior]
     print('Made behaviors')
