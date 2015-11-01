@@ -50,9 +50,11 @@ class Bbcon:
             # along with any pre-processing of those values (as described below)
             for sensob in self.sensobs:
                 sensob.update()
-            print("Sensors updated.")
+            print("Sensors (and sensobs) updated.")
 
             print("Updating behaviors...")
+            for behavior in self.behaviors:
+                behavior.sense_and_act()
             # TODO: Update all behaviors.
             # These updates involve reading relevant sensob values and producing a motor recommendation.
             print("Behaviors updated.")
