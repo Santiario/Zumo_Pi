@@ -21,12 +21,13 @@ class Behavior:
         """
         self.sensob = sensob
         self.motor_recommendation = ('F', 2)
-        self.priority = 0
+        self.priority = priority
         self.match_degree = 0
         self.weight = 0
         self.update()
 
     def get_weight(self):
+        print('Priority:', self.priority, 'Match degree:', self.match_degree)
         return self.priority * self.match_degree
 
     @abstractmethod
