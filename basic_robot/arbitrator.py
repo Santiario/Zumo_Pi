@@ -16,6 +16,9 @@ class Arbitrator:
         -------
         motor_recommendation : On the format (action, duration).
         """
-        winning_behavior = max(active_behaviors, key=attrgetter('weight'))
+        winning_behavior = active_behaviors[0]
+        for behavior in active_behaviors:
+            if behavior.weight > winning_behavior.weight:
+                winning_behavior = behavior
         print("Winning behavior is " + str(winning_behavior.motor_recommendation))
         return winning_behavior.motor_recommendation
