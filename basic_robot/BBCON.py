@@ -33,13 +33,13 @@ class Bbcon:
 
     def run_one_timestep(self):
         """Constitutes core activity."""
-        print("Updating sensors...")
+        print("Updating sensobs...")
         # Update all sensobs.
         # These updates will involve querying the relevant sensors for their values,
         # along with any pre-processing of those values (as described below)
         for sensob in self.sensobs:
             sensob.update()
-        print("Sensors (and sensobs) updated.")
+        print("Sensobs updated.")
 
         print("Updating behaviors...")
         for behavior in self.behaviors:
