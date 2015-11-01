@@ -60,7 +60,7 @@ class Bbcon:
             print("Behaviors updated.")
 
             print("Calling arbitrator...")
-            self.motor_recommendation = self.arbitrator.choose_action()
+            self.motor_recommendation = self.arbitrator.choose_action(self.active_behaviors)
             print('Got a motor recommendation from the arbitrator')
 
             print("Updating motob with motor recommendations...")
