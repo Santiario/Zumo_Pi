@@ -4,7 +4,7 @@ __author__ = 'estensen'
 
 
 class Bbcon:
-    def __init__(self, behaviors, active_behaviors, sensobs, motobs, arbitrator):
+    def __init__(self, behaviors, active_behaviors, sensobs, motob, arbitrator):
         """Initialize bbcon.
 
         Parameters
@@ -19,9 +19,10 @@ class Bbcon:
         self.behaviors = behaviors
         self.active_behaviors = active_behaviors
         self.sensobs = sensobs
-        self.motobs = motobs
+        self.motob = motob
         self.arbitrator = arbitrator
         self.timestep = 0
+        self.motor_recommendation = ('F', 1)  # Initial motor recommendation is forward, 1 second.
 
     def add_behavior(self, new_behavior):
         """Append a newly-created behavior onto the behaviors list."""
@@ -55,29 +56,25 @@ class Bbcon:
             print("Updating behaviors...")
             for behavior in self.behaviors:
                 behavior.sense_and_act()
-            # TODO: Update all behaviors.
             # These updates involve reading relevant sensob values and producing a motor recommendation.
             print("Behaviors updated.")
 
             print("Calling arbitrator...")
-            # Invoke the arbitrator by calling arbitrator.choose action. Which will choose a winning
-            # behavior and return that behavior’s motor recommendations and halt request flag.
-            motor_recommendation = self.arbitrator.choose_action()
+            self.motor_recommendation = self.arbitrator.choose_action()
+            print('Got a motor recommendation from the arbitrator')
 
             print("Updating motob with motor recommendations...")
-            # TODO: Update the motobs based on these motor recommendations.
             # The motobs will then update the settings of all motors.
-            m = Motob
-            m.update(motor_recommendation)
+            self.motob.update(self.motor_recommendation)
             print("Motob updated.")
-            m.operationalize()
-            print("Motors updated.")
 
+            print('Operating motors')
+            self.motob.operationalize()
             print("Waiting...")
             # This pause (in code execution) will allow the motor settings to remain active for a short period of time,
             # e.g., one half second, thus producing activity in the robot, such as moving forward or turning.
             time.sleep(0.5)
+
             self.timestep += 1
 
-            print("Timestep complete...")
-            print("Ready for new action.")
+            print("One timestep finished")
