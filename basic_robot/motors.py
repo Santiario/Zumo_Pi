@@ -44,9 +44,12 @@ class Motors():
     def backward(self, speed=0.25, dur=None):
         self.set_left_dir(1)
         self.set_right_dir(1)
+        print('Set right and left dir!')
         self.set_left_speed(self.dc)
         self.set_right_speed(self.dc)
-        self.dc = int(self.max * speed)
+
+        print('Set right and left speed!')
+        #self.dc = int(self.max * speed)
 
         self.persist(dur)
 
