@@ -49,8 +49,9 @@ class Motors():
         self.set_right_speed(self.dc)
 
         print('Set right and left speed!')
-        #self.dc = int(self.max * speed)
-
+        print('Setting dc with:', self.max, '*', speed)
+        self.dc = int(self.max * speed)
+        print('DC is set!')
         self.persist(dur)
 
     def left(self, speed=0.25, dur=None):
