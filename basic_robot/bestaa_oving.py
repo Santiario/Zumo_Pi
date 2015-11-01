@@ -9,16 +9,20 @@ from BBCON import Bbcon
 def main():
 
     ultrasonic_sensor = Ultrasonic()
-    #reflectance_sensor = ReflectanceSensors()
     camera_sensor = Camera()
+    reflectance_sensor = ReflectanceSensors()
     print('Made sensors')
 
     ultrasonic_sensob = Sensob(ultrasonic_sensor)
     camera_sensob = CameraSensob(camera_sensor)
+    reflectance_sensob = Sensob(reflectance_sensor)
+    sensobs = [ultrasonic_sensob, camera_sensob, reflectance_sensob]
     print('Made sensobs')
 
     ultrasonic_behavior = SonicBehavior(ultrasonic_sensob)
     camera_behavior = CameraBehavior(camera_sensob)
+    #reflectance_behavior =
+    behaviors = [ultrasonic_behavior, camera_behavior]
     print('Made behaviors')
 
     arbitrator = Arbitrator()
@@ -27,7 +31,7 @@ def main():
     motob = Motob()
     print('Made motob')
 
-    bbcon = Bbcon([ultrasonic_behavior, camera_behavior], [ultrasonic_sensob, camera_sensob], motob, arbitrator)
+    bbcon = Bbcon(behaviors, sensobs, motob, arbitrator)
     print('Made BBCON')
 
     print('Running...')

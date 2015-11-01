@@ -33,25 +33,25 @@ class Bbcon:
 
     def run_one_timestep(self):
         """Constitutes core activity."""
-        print("Updating sensobs...")
+        #print("Updating sensobs...")
         # Update all sensobs.
         # These updates will involve querying the relevant sensors for their values,
         # along with any pre-processing of those values (as described below)
         for sensob in self.sensobs:
             sensob.update()
-        print("Sensobs updated.")
+        #print("Sensobs updated.")
 
-        print("Updating behaviors...")
+        #print("Updating behaviors...")
         for behavior in self.behaviors:
             behavior.sense_and_act()
         # These updates involve reading relevant sensob values and producing a motor recommendation.
-        print("Behaviors updated.")
+        #print("Behaviors updated.")
 
-        print("Calling arbitrator...")
+        #print("Calling arbitrator...")
         self.motor_recommendation = self.arbitrator.choose_action(self.behaviors)
-        print('Got a motor recommendation from the arbitrator')
+        #print('Got a motor recommendation from the arbitrator')
 
-        print("Updating motob with motor recommendations...")
+        #print("Updating motob with motor recommendations...")
         # The motobs will then update the settings of all motors.
         self.motob.update(self.motor_recommendation)
         self.timestep += 1

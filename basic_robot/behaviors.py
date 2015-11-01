@@ -27,7 +27,7 @@ class Behavior:
         self.update()
 
     def get_weight(self):
-        print('Priority:', self.priority, 'Match degree:', self.match_degree)
+        #print('Priority:', self.priority, 'Match degree:', self.match_degree)
         return self.priority * self.match_degree
 
     @abstractmethod
@@ -40,7 +40,6 @@ class Behavior:
 
     def update(self):
         """Interface between bbcon and behavior."""
-        print("Updating behavior.")
         self.sense_and_act()
         self.weight = self.get_weight()
 
