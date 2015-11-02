@@ -51,13 +51,13 @@ class Motors():
         self.persist(dur)
 
     def flee(self, speed=1):
+        print('Fleeing!')
         self.dc = int(self.max * speed)
         self.set_left_dir(0)
         self.set_right_dir(1)
         self.set_left_speed(self.dc)
         self.set_right_speed(self.dc)
-        sleep(0.85)
-        self.stop()
+        sleep(0.45)
         self.set_left_dir(0)
         self.set_right_dir(0)
         self.set_left_speed(self.dc)
