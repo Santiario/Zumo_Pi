@@ -80,8 +80,12 @@ class ReflectanceSensob(Sensob):
         self.sensor.update()
         sensors = self.sensor.get_value()
         print(sensors)
-        avg = sum(sensors)/6
-        self.value = avg
+        minimum = 1.0
+        for sensor in sensors:
+            if sensor < minimum and sensor > 0.0:
+                minimum = sensor
+        self.value = minimum
+
 
 
 
