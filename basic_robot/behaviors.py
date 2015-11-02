@@ -112,14 +112,14 @@ class ReflectanceSensorsBehavior(Behavior):
     def set_match_degree(self):
         """Generate match according to environment."""
         print("IR value is:", self.sensob.value)
-        if self.sensob.value > 0.8:
+        if self.sensob.value < 0.3:
             self.weight = 0.95
         else:
             self.weight = 0.0
 
     def set_motor_recommendation(self):
         """Generate motor recommendation for this behavior."""
-        if self.sensob.value > 0.8:
+        if self.sensob.value < 0.3:
             self.motor_recommendation = ('Z', 1)  # Boost!
         else:
             self.motor_recommendation = ('F', 2)
