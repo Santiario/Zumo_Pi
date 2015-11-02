@@ -57,7 +57,7 @@ class Motors():
         self.set_right_dir(1)
         self.set_left_speed(self.dc)
         self.set_right_speed(self.dc)
-        sleep(0.45)
+        sleep(0.25)
         self.set_left_dir(0)
         self.set_right_dir(0)
         self.set_left_speed(self.dc)
@@ -93,6 +93,18 @@ class Motors():
         self.set_left_speed(self.dc)
         self.set_right_speed(self.dc)
 
+    def turn(self, speed=0.25):
+        self.dc = int(self.max * speed)
+        self.set_left_dir(0)
+        self.set_left_speed(self.dc)
+        self.set_right_dir(1)
+        self.set_right_speed(self.dc)
+        sleep(0.45)
+        self.set_left_dir(0)
+        self.set_left_speed(self.dc)
+        self.set_right_dir(0)
+        self.set_right_speed(self.dc)
+
     # Val should be a 2-element vector with values for the left and right motor speeds, both in the range [-1, 1].
     def set_value(self, val,dur=None):
         left_val = int(self.max * val[0])
@@ -108,6 +120,10 @@ class Motors():
         self.persist(dur)
 
     # These are lower-level routines that translate speeds and directions into write commands to the motor output pins.
+
+    def boost(self):
+        self.dc = 1024
+        sleep(1)
 
     def set_left_speed(self, dc):
         wp.pwmWrite(18, dc)

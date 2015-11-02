@@ -113,7 +113,7 @@ class ReflectanceSensorsBehavior(Behavior):
         """Generate match according to environment."""
         print("IR value is:", self.sensob.value)
         if self.sensob.value > 600:
-            self.weight = 1.0
+            self.weight = 0.95
         else:
             self.weight = 0.0
 
