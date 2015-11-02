@@ -56,16 +56,16 @@ class SonicBehavior(Behavior):
     def set_match_degree(self):
         """Generate match according to environment."""
         print("Distance is:", self.sensob.value)
-        if self.sensob.value < 5:
+        if self.sensob.value < 15:
             self.weight = 0.9
-        elif self.sensob.value < 10:
+        elif self.sensob.value < 25:
             self.weight = 0.8
         else:
             self.weight = 0.5
 
     def set_motor_recommendation(self):
         """Generate motor recommendation for this behavior."""
-        if self.sensob.value < 20:
+        if self.sensob.value < 15:
             self.motor_recommendation = ('T', 1)  # TODO: Change the number to match a 180 degree turn
         else:
             self.motor_recommendation = ('F', 2)  # Drive forward for two more seconds
@@ -112,7 +112,7 @@ class ReflectanceSensorsBehavior(Behavior):
     def set_match_degree(self):
         """Generate match according to environment."""
         print("IR value is:", self.sensob.value)
-        if self.sensob.value < 0.1:
+        if self.sensob.value < 0.15:
             self.weight = 0.95
         else:
             self.weight = 0.0
@@ -120,7 +120,7 @@ class ReflectanceSensorsBehavior(Behavior):
     def set_motor_recommendation(self):
         """Generate motor recommendation for this behavior."""
         self.set_match_degree()
-        if self.sensob.value < 0.1:
+        if self.sensob.value < 0.15:
             self.motor_recommendation = ('Z', 1)  # Boost!
         else:
             self.motor_recommendation = ('F', 2)
