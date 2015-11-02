@@ -45,8 +45,9 @@ class Motob:
 
         Example of actions
         ------------------
-        F = Full speed forward
-        B = Full speed backward
+        F = Drive forward
+        B = Drive backward
+        Z = Boost forward
         T = Turn around 180 degrees
         L = Turn left while driving forward
         R = Turn right while driving forward
@@ -57,6 +58,8 @@ class Motob:
         elif action == 'B':
             print('Escaping!')
             self.m.backward(0.25, duration)
+        elif action == 'Z':
+            self.m.set_value((1, 1), duration)
         elif action == 'T':
             self.m.flee()  # Turn around, must be tuned for 180 degree turn.
         elif action == 'L':
