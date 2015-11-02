@@ -86,7 +86,7 @@ class CameraBehavior(Behavior):
     def set_motor_recommendation(self):
         """Generate motor recommendation for this behavior."""
         if self.sensob.value == 1.0:
-            self.motor_recommendation = ('B', 7)  # Drives backwards for 7 seconds
+            self.motor_recommendation = ('X', 7)  # Drives backwards for 7 seconds
         else:
             self.motor_recommendation = ('F', 2)  # Continue forward for 2 seconds
         self.set_match_degree()

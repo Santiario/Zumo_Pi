@@ -57,8 +57,10 @@ class Motob:
         elif action == 'B':
             print('Escaping!')
             self.m.backward(0.25, duration)
-        elif action == 'T':
+        elif action == 'X':
             self.m.flee()  # Turn around, must be tuned for 180 degree turn.
+        elif action == 'T':
+            self.m.set_value((0.5, -0.5))
         elif action == 'L':
             self.m.left((0.1, 0.25), duration)
         elif action == 'R':
