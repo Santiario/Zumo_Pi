@@ -98,4 +98,4 @@ class RandomBehavior(Behavior):
     def __repr__(self):
         return "Random"
 
-    
+

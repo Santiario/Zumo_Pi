@@ -29,7 +29,7 @@ from imager2 import Imager
 class CameraSensob(Sensob):
 
 
-    def __init__(self, sensor, color_treshold=1000):
+    def __init__(self, sensor, color_treshold=2000):
         """Initialize bbcon.
 
         Parameters
