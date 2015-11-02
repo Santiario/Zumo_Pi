@@ -29,7 +29,7 @@ from imager2 import Imager
 class CameraSensob(Sensob):
 
 
-    def __init__(self, sensor, color_treshold=1000):
+    def __init__(self, sensor, color_treshold=2000):
         """Initialize bbcon.
 
         Parameters
@@ -50,7 +50,7 @@ class CameraSensob(Sensob):
         If there's enough red, motor"""
         self.sensor.update()
         taken_image = self.sensor.get_value()
-        wta_image = Imager(image=taken_image).map_color_wta()  # colors each pixel the dominant color
+        wta_image = Imager(image=taken_image).map_color_wta(thresh=0.5)  # colors each pixel the dominant color
         red_count = 0
         for i in range(20, 100):
             for j in range(20, 80):
