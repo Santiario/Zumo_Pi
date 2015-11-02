@@ -119,8 +119,8 @@ class ReflectanceSensorsBehavior(Behavior):
 
     def set_motor_recommendation(self):
         """Generate motor recommendation for this behavior."""
+        self.set_match_degree()
         if self.sensob.value < 0.3:
             self.motor_recommendation = ('Z', 1)  # Boost!
         else:
             self.motor_recommendation = ('F', 2)
-        self.set_match_degree()
