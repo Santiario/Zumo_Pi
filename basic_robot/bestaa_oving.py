@@ -15,7 +15,7 @@ def main():
 
     ultrasonic_sensob = Sensob(ultrasonic_sensor)
     camera_sensob = CameraSensob(camera_sensor)
-    reflectance_sensob = Sensob(reflectance_sensor)
+    reflectance_sensob = ReflectanceSensob(reflectance_sensor)
     sensobs = [ultrasonic_sensob, camera_sensob, reflectance_sensob]
     print('Made sensobs')
 
