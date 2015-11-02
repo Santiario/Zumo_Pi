@@ -24,7 +24,7 @@ class Sensob:
         """
         self.value = self.sensor.update()
 
-from .imager2 import Imager
+from imager2 import Imager
 
 class CameraSensob(Sensob):
 
