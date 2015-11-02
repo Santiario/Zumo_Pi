@@ -27,7 +27,7 @@ class Behavior:
         self.update()
 
     def get_weight(self):
-        #print('Priority:', self.priority, 'Match degree:', self.match_degree)
+        # print('Priority:', self.priority, 'Match degree:', self.match_degree)
         return self.priority * self.match_degree
 
     @abstractmethod
@@ -58,11 +58,11 @@ class SonicBehavior(Behavior):
         """Generate match according to environment."""
         print('Distance is:', self.sensob.value)
         if self.sensob.value < 5:
-            self.weight = 1.0
-        elif self.sensob.value < 10:
             self.weight = 0.9
+        elif self.sensob.value < 10:
+            self.weight = 0.8
         else:
-            self.weight = 0.6
+            self.weight = 0.5
 
     def set_motor_recommendation(self):
         """Generate motor recommendation for this behavior."""
@@ -93,5 +93,9 @@ class CameraBehavior(Behavior):
             self.motor_recommendation = ('F', 2)  # Continue forward for 2 seconds
         self.set_match_degree()
 
+class RandomBehavior(Behavior):
 
+    def __repr__(self):
+        return "Random"
 
+    
