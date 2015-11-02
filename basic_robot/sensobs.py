@@ -1,4 +1,5 @@
 from abc import abstractmethod
+
 __author__ = 'estensen'
 
 
@@ -27,12 +28,9 @@ class Sensob(object):
 from imager2 import Imager
 
 class CameraSensob(Sensob):
-
-
-
     def __init__(self, sensor, color_treshold=1700):
         super(CameraSensob, self).__init__(sensor)
-        """
+        """Initialize bbcon.
 
         Parameters
         ----------
@@ -54,16 +52,16 @@ class CameraSensob(Sensob):
         red_count = 0
         for i in range(20, 100):
             for j in range(20, 80):
-                if(wta_image.get_pixel(i,j)[0] > 100):
+                if wta_image.get_pixel(i, j)[0] > 100:
                     red_count += 1
         print('Red count is:', red_count)
-        if(red_count > self.color_treshold):
+        if red_count > self.color_treshold:
             self.value = 1.0
         else:
             self.value = 0.0
 
-class ReflectanceSensob(Sensob):
 
+class ReflectanceSensob(Sensob):
     def __init__(self, sensor):
         """
         Parameters
@@ -84,11 +82,4 @@ class ReflectanceSensob(Sensob):
             if sensor < minimum and sensor > 0.0:
                 minimum = sensor
         self.value = minimum
-
-
-
-
-
-
-
 
