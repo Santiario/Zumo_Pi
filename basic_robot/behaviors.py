@@ -50,13 +50,12 @@ class Behavior:
 
 
 class SonicBehavior(Behavior):
-
     def __repr__(self):
-        return 'Ultrasonic'
+        return "Ultrasonic"
 
     def set_match_degree(self):
         """Generate match according to environment."""
-        print('Distance is:', self.sensob.value)
+        print("Distance is:", self.sensob.value)
         if self.sensob.value < 5:
             self.weight = 0.9
         elif self.sensob.value < 10:
@@ -74,9 +73,8 @@ class SonicBehavior(Behavior):
 
 
 class CameraBehavior(Behavior):
-
     def __repr__(self):
-        return 'Camera'
+        return "Camera"
 
     def set_match_degree(self):
         """Generate match according to environment."""
@@ -93,9 +91,36 @@ class CameraBehavior(Behavior):
             self.motor_recommendation = ('F', 2)  # Continue forward for 2 seconds
         self.set_match_degree()
 
-class RandomBehavior(Behavior):
 
+class RandomBehavior(Behavior):
     def __repr__(self):
         return "Random"
 
-    
+    def set_match_degree(self):
+        pass
+
+    def set_motor_recommendation(self):
+        pass
+
+
+class ReflectanceSensorsBehavior(Behavior):
+    def __repr__(self):
+        return "Reflectance Sensors"
+
+    def set_match_degree(self):
+        """Generate match according to environment."""
+        print("Distance is:", self.sensob.value)
+        if self.sensob.value < 7:
+            self.weight = 1.0
+        elif self.sensob.value < 15:
+            self.weight = 0.7
+        else:
+            self.weight = 0.0
+
+    def set_motor_recommendation(self):
+        """Generate motor recommendation for this behavior."""
+        if self.sensob.value < 15:
+            self.motor_recommendation = ('T', 1)
+        else:
+            self.motor_recommendation = ('F', 2)
+        self.set_match_degree()
