@@ -93,6 +93,7 @@ class CameraBehavior(Behavior):
 
 
 class RandomBehavior(Behavior):
+    """Stochastic behavior."""
     def __repr__(self):
         return "Random"
 
@@ -104,23 +105,22 @@ class RandomBehavior(Behavior):
 
 
 class ReflectanceSensorsBehavior(Behavior):
+    """Using the robots built in array of IR sensors that points to the ground."""
     def __repr__(self):
         return "Reflectance Sensors"
 
     def set_match_degree(self):
         """Generate match according to environment."""
         print("Distance is:", self.sensob.value)
-        if self.sensob.value < 7:
+        if self.sensob.value > 600:
             self.weight = 1.0
-        elif self.sensob.value < 15:
-            self.weight = 0.7
         else:
             self.weight = 0.0
 
     def set_motor_recommendation(self):
         """Generate motor recommendation for this behavior."""
-        if self.sensob.value < 15:
-            self.motor_recommendation = ('T', 1)
+        if self.sensob.value > 600:
+            self.motor_recommendation = ('Z', 1)  # Boost!
         else:
             self.motor_recommendation = ('F', 2)
         self.set_match_degree()
