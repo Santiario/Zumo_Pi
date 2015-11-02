@@ -9,15 +9,21 @@ from BBCON import Bbcon
 def main():
 
     ultrasonic_sensor = Ultrasonic()
-    print('Made ultrasonic sensor')
-    # reflectance_sensor = ReflectanceSensors()
-    # camera_sensor = Camera()
+    camera_sensor = Camera()
+    reflectance_sensor = ReflectanceSensors()
+    print('Made sensors')
 
     ultrasonic_sensob = Sensob(ultrasonic_sensor)
-    print('Made ultrasonic sensob')
+    camera_sensob = CameraSensob(camera_sensor)
+    reflectance_sensob = Sensob(reflectance_sensor)
+    sensobs = [ultrasonic_sensob, camera_sensob, reflectance_sensob]
+    print('Made sensobs')
 
     ultrasonic_behavior = SonicBehavior(ultrasonic_sensob)
-    print('Made ultrasonic behavior')
+    camera_behavior = CameraBehavior(camera_sensob, 1.0)
+    # reflectance_behavior =
+    behaviors = [ultrasonic_behavior, camera_behavior]
+    print('Made behaviors')
 
     arbitrator = Arbitrator()
     print('Made arbitrator')
@@ -25,18 +31,16 @@ def main():
     motob = Motob()
     print('Made motob')
 
-    bbcon = Bbcon([ultrasonic_behavior], [ultrasonic_behavior], [ultrasonic_sensob], motob,arbitrator)
+    bbcon = Bbcon(behaviors, sensobs, motob, arbitrator)
+    print('Made BBCON')
 
-    print('Made motob')
-
-    print('Running bbcon')
-    bbcon.run_one_timestep()
-
-
-
-
-
-
+    print('Running...')
+    try:
+        while True:
+            bbcon.run_one_timestep()
+    except:
+        bbcon.motob.m.stop()
+        print('Exited')
 
 
 if __name__ == '__main__':

@@ -15,6 +15,7 @@ class Motors():
         self.normal = 300
         self.low = 100
 
+
         wp.wiringPiSetupGpio()
 
         wp.pinMode(18, 2)
@@ -27,7 +28,7 @@ class Motors():
 
         self.freq = 400  # PWM frequency
         self.dc = 0  # Duty cycle
-        print("Completed setting up motors!")
+        #print("Completed setting up motors!")
 
     # For the following motion commands, the speed is in the range [-1, 1], indicating the fraction of the maximum
     # speed, with negative values indicating that the wheel will spin in reverse. The argument "dur" (duration)
@@ -42,13 +43,25 @@ class Motors():
         self.persist(dur)
 
     def backward(self, speed=0.25, dur=None):
+        self.dc = int(self.max * speed)
         self.set_left_dir(1)
         self.set_right_dir(1)
         self.set_left_speed(self.dc)
         self.set_right_speed(self.dc)
-        self.dc = int(self.max * speed)
-
         self.persist(dur)
+
+    def flee(self, speed=1):
+        self.dc = int(self.max * speed)
+        self.set_left_dir(0)
+        self.set_right_dir(1)
+        self.set_left_speed(self.dc)
+        self.set_right_speed(self.dc)
+        sleep(0.85)
+        self.stop()
+        self.set_left_dir(0)
+        self.set_right_dir(0)
+        self.set_left_speed(self.dc)
+        self.set_right_speed(self.dc)
 
     def left(self, speed=0.25, dur=None):
         s = int(self.max * speed)
@@ -110,6 +123,7 @@ class Motors():
 
 
     def persist(self, duration):
-        if duration:
-            sleep(duration)
-            self.stop()
+        pass
+        #if duration:
+        #    sleep(duration)
+        #    self.stop()

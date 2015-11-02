@@ -27,7 +27,7 @@ class Behavior:
         self.update()
 
     def get_weight(self):
-        print('Priority:', self.priority, 'Match degree:', self.match_degree)
+        # print('Priority:', self.priority, 'Match degree:', self.match_degree)
         return self.priority * self.match_degree
 
     @abstractmethod
@@ -40,26 +40,28 @@ class Behavior:
 
     def update(self):
         """Interface between bbcon and behavior."""
-        print("Updating behavior.")
         self.sense_and_act()
-        self.weight = self.get_weight()
+        # self.weight = self.get_weight()
 
     def sense_and_act(self):
         """Computes behavior and sensob readings to produce motor recommendations and halt requests."""
-        self.set_match_degree()
+        # self.set_match_degree()
         self.set_motor_recommendation()
 
 
 class SonicBehavior(Behavior):
+    def __repr__(self):
+        return "Ultrasonic"
+
     def set_match_degree(self):
         """Generate match according to environment."""
+        print("Distance is:", self.sensob.value)
         if self.sensob.value < 5:
-            self.match_degree = 1.0
+            self.weight = 0.9
         elif self.sensob.value < 10:
-            self.match_degree = 0.9
+            self.weight = 0.8
         else:
-            self.match_degree = 0.6
-
+            self.weight = 0.5
 
     def set_motor_recommendation(self):
         """Generate motor recommendation for this behavior."""
@@ -67,16 +69,19 @@ class SonicBehavior(Behavior):
             self.motor_recommendation = ('T', 1)  # TODO: Change the number to match a 180 degree turn
         else:
             self.motor_recommendation = ('F', 2)  # Drive forward for two more seconds
+        self.set_match_degree()
 
 
 class CameraBehavior(Behavior):
+    def __repr__(self):
+        return "Camera"
 
     def set_match_degree(self):
         """Generate match according to environment."""
         if self.sensob.value == 1.0:
-            self.match_degree = 1.0
+            self.weight = 1.0
         else:
-            self.match_degree = 0.0
+            self.weight = 0.0
 
     def set_motor_recommendation(self):
         """Generate motor recommendation for this behavior."""
@@ -84,6 +89,38 @@ class CameraBehavior(Behavior):
             self.motor_recommendation = ('B', 7)  # Drives backwards for 7 seconds
         else:
             self.motor_recommendation = ('F', 2)  # Continue forward for 2 seconds
+        self.set_match_degree()
 
 
+class RandomBehavior(Behavior):
+    """Stochastic behavior."""
+    def __repr__(self):
+        return "Random"
 
+    def set_match_degree(self):
+        pass
+
+    def set_motor_recommendation(self):
+        pass
+
+
+class ReflectanceSensorsBehavior(Behavior):
+    """Using the robots built in array of IR sensors that points to the ground."""
+    def __repr__(self):
+        return "Reflectance Sensors"
+
+    def set_match_degree(self):
+        """Generate match according to environment."""
+        print("Distance is:", self.sensob.value)
+        if self.sensob.value > 600:
+            self.weight = 1.0
+        else:
+            self.weight = 0.0
+
+    def set_motor_recommendation(self):
+        """Generate motor recommendation for this behavior."""
+        if self.sensob.value > 600:
+            self.motor_recommendation = ('Z', 1)  # Boost!
+        else:
+            self.motor_recommendation = ('F', 2)
+        self.set_match_degree()
