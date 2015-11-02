@@ -1,4 +1,6 @@
 from abc import abstractmethod
+from imager2 import Imager
+
 __author__ = 'estensen'
 
 
@@ -24,11 +26,8 @@ class Sensob:
         """
         self.value = self.sensor.update()
 
-from imager2 import Imager
 
 class CameraSensob(Sensob):
-
-
     def __init__(self, sensor, color_treshold=2000):
         """Initialize bbcon.
 
@@ -61,12 +60,3 @@ class CameraSensob(Sensob):
             self.value = 1.0
         else:
             self.value = 0.0
-
-
-
-
-
-
-
-
-
