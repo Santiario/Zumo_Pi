@@ -2,7 +2,7 @@ from abc import abstractmethod
 __author__ = 'estensen'
 
 
-class Sensob:
+class Sensob(object):
     """Interface between sensors and bbcon"""
     def __init__(self, sensor):
         """Initialize Sensob object.
@@ -31,6 +31,7 @@ class CameraSensob(Sensob):
 
 
     def __init__(self, sensor, color_treshold=1700):
+        super(CameraSensob, self).__init__(sensor)
         """
 
         Parameters
@@ -40,8 +41,6 @@ class CameraSensob(Sensob):
         color_treshhold: amount of a colour needed in order to register as that color.
         """
         self.color = 0
-        self.sensor = sensor
-        self.value = self.sensor.update()
         self.color_treshold = color_treshold
 
     def update(self):
