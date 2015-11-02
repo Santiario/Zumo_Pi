@@ -38,16 +38,16 @@ class Motors():
         self.dc = int(self.max * speed)
         self.set_left_dir(0)
         self.set_right_dir(0)
-        self.set_left_speed(self.dc)
-        self.set_right_speed(self.dc)
+        self.set_left_speed(self.normal)
+        self.set_right_speed(self.normal)
         self.persist(dur)
 
     def backward(self, speed=0.25, dur=None):
         self.dc = int(self.max * speed)
         self.set_left_dir(1)
         self.set_right_dir(1)
-        self.set_left_speed(self.dc)
-        self.set_right_speed(self.dc)
+        self.set_left_speed(self.normal)
+        self.set_right_speed(self.normal)
         self.persist(dur)
 
     def flee(self, speed=1):
@@ -55,13 +55,13 @@ class Motors():
         self.dc = int(self.max * speed)
         self.set_left_dir(0)
         self.set_right_dir(1)
-        self.set_left_speed(self.dc)
-        self.set_right_speed(self.dc)
-        sleep(0.25)
+        self.set_left_speed(self.high)
+        self.set_right_speed(self.high)
+        sleep(0.45)
         self.set_left_dir(0)
         self.set_right_dir(0)
-        self.set_left_speed(self.dc)
-        self.set_right_speed(self.dc)
+        self.set_left_speed(self.normal)
+        self.set_right_speed(self.normal)
 
     def left(self, speed=0.25, dur=None):
         s = int(self.max * speed)
@@ -96,19 +96,19 @@ class Motors():
     def turn(self, speed=0.25):
         self.dc = int(self.max * speed)
         self.set_left_dir(0)
-        self.set_left_speed(self.dc)
+        self.set_left_speed(self.normal)
         self.set_right_dir(1)
-        self.set_right_speed(self.dc)
+        self.set_right_speed(self.normal)
         sleep(0.45)
         self.set_left_dir(0)
-        self.set_left_speed(self.dc)
+        self.set_left_speed(self.normal)
         self.set_right_dir(0)
-        self.set_right_speed(self.dc)
+        self.set_right_speed(self.normal)
 
     # Val should be a 2-element vector with values for the left and right motor speeds, both in the range [-1, 1].
     def set_value(self, val,dur=None):
-        left_val = int(self.max * val[0])
-        right_val = int(self.max * val[1])
+        left_val = int(self.normal * val[0])
+        right_val = int(self.normal * val[1])
 
         # If we pass negative values to the motors, we need to reverse the direction of the motor
         self.set_left_dir(1) if (left_val < 0) else self.set_left_dir(0)
@@ -122,8 +122,11 @@ class Motors():
     # These are lower-level routines that translate speeds and directions into write commands to the motor output pins.
 
     def boost(self):
-        self.dc = 1024
+        self.set_left_speed(self.high)
+        self.set_right_speed(self.high)
         sleep(1)
+        self.set_left_speed(self.normal)
+        self.set_right_speed(self.normal)
 
     def set_left_speed(self, dc):
         wp.pwmWrite(18, dc)
