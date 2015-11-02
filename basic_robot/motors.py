@@ -15,6 +15,7 @@ class Motors():
         self.normal = 300
         self.low = 100
 
+
         wp.wiringPiSetupGpio()
 
         wp.pinMode(18, 2)
@@ -45,14 +46,22 @@ class Motors():
         self.dc = int(self.max * speed)
         self.set_left_dir(1)
         self.set_right_dir(1)
-        print('Set right and left dir!')
         self.set_left_speed(self.dc)
         self.set_right_speed(self.dc)
-
-        print('Set right and left speed!')
-        print('Setting dc with:', self.max, '*', speed)
-        print('DC is set!')
         self.persist(dur)
+
+    def flee(self, speed=1):
+        self.dc = int(self.max * speed)
+        self.set_left_dir(0)
+        self.set_right_dir(1)
+        self.set_left_speed(self.dc)
+        self.set_right_speed(self.dc)
+        sleep(0.85)
+        self.stop()
+        self.set_left_dir(0)
+        self.set_right_dir(0)
+        self.set_left_speed(self.dc)
+        self.set_right_speed(self.dc)
 
     def left(self, speed=0.25, dur=None):
         s = int(self.max * speed)
