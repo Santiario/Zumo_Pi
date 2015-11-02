@@ -78,6 +78,7 @@ class ReflectanceSensob(Sensob):
 
     def update(self):
         sensors = self.sensor.get_value()
+        print(sensors)
         avg = int(sum(sensors)/6)
         self.value = avg
 
